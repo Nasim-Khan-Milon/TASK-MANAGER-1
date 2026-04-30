@@ -56,8 +56,8 @@ const filterByStatus = (status) => {
 
 const searchTasks = (query) => {
   return tasks.filter(t =>
-    t.title.toLowerCase().includes(query) ||
-    t.description.toLowerCase().includes(query)
+    t.title.toLowerCase().includes(query.toLowerCase()) ||
+    t.description.toLowerCase().includes(query.toLowerCase())
   );
 };
 
