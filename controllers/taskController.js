@@ -50,9 +50,27 @@ const getTask = (req, res) => {
   }
 };
 
+const searchTasks = (req, res) => {
+  try {
+    const query = req.query.q?.toLowerCase() || "";
+    const result = taskModel.searchTasks(query);
+    res.json(result);
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const filterTasks = (req, res) => {
+  const result = taskModel.filterByStatus(req.params.status);
+  res.json(result);
+};
+
 
 module.exports = {
   createTask,
   getAllTasks,
-  getTask
+  getTask,
+  searchTasks,
+  filterTasks
 };
