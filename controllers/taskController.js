@@ -66,11 +66,36 @@ const filterTasks = (req, res) => {
   res.json(result);
 };
 
+const updateTask = (req, res) => {
+  const updated = taskModel.updateTask(parseInt(req.params.id), req.body);
+
+  if (!updated) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+
+  res.json({   
+     message: "Task updated successfully", 
+     task: updated 
+    });
+};
+
+const deleteTask = (req, res) => {
+  const success = taskModel.deleteTask(parseInt(req.params.id));
+
+  if (!success) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+
+  res.json({ message: "Task deleted successfully" });
+};
+
 
 module.exports = {
   createTask,
   getAllTasks,
   getTask,
   searchTasks,
-  filterTasks
+  filterTasks,
+  updateTask,
+  deleteTask
 };
